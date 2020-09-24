@@ -2,7 +2,6 @@ package com.example.project;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class TestCupomFiscal {
@@ -101,7 +100,7 @@ public class TestCupomFiscal {
 	@Test
 	public void cepVazio() {
 		rodarTestarRetorno(TEXTO_ESPERADO_SEM_CEP, NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, MUNICIPIO,
-				ESTADO, null, TELEFONE, OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
+				ESTADO, "", TELEFONE, OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL);
 	}
 
 	@Test
@@ -119,7 +118,7 @@ public class TestCupomFiscal {
 	@Test
 	public void cnpjVazio() {
 		verificarCampoObrigatorio("O campo CNPJ da loja é obrigatório", NOME_LOJA, LOGRADOURO, NUMERO, COMPLEMENTO,
-				BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE, OBSERVACAO, null, INSCRICAO_ESTADUAL);
+				BAIRRO, MUNICIPIO, ESTADO, CEP, TELEFONE, OBSERVACAO, "", INSCRICAO_ESTADUAL);
 	}
 
 	@Test
@@ -131,22 +130,29 @@ public class TestCupomFiscal {
 	@Test
 	public void exercicio02_Customizado() {
 		// Defina seus próprios valores para as variáveis a seguir
-		String nomeLoja = "";
-		String logradouro = "";
-		int numero = 0;
-		String complemento = "";
-		String bairro = "";
-		String municipio = "";
-		String estado = "";
-		String cep = "";
-		String telefone = "";
-		String observacao = "";
-		String cnpj = "";
-		String inscricaoEstadual = "";
+		String nomeLoja = "Boa vista Flores";
+		String logradouro = "Rua Jardim Peres";
+		int numero = 122;
+		String complemento = "EUC F30/31/44";
+		String bairro = "Centro";
+		String municipio = "Monteiro";
+		String estado = "PB";
+		String cep = "58500000";
+		String telefone = "(99) 9999-9999";
+		String observacao = "Loja 122 (PDB)";
+		String cnpj = "22.300.551/0110-56";
+		String inscricaoEstadual = "432.118.667.777";
 
 		// E atualize o texto esperado abaixo
-		rodarTestarRetorno("" + BREAK, nomeLoja, logradouro, numero, complemento, bairro, municipio, estado, cep,
-				telefone, observacao, cnpj, inscricaoEstadual);
+		rodarTestarRetorno("Boa vista Flores" + BREAK + 
+		"Rua Jardim Peres, 122 EUC F30/31/44" + BREAK + 
+		"Centro - Monteiro - PB" + BREAK + 
+		"CEP:58500000 Tel (99) 9999-9999" + BREAK + 
+		"Loja 122 (PDB)" + BREAK + 
+		"CNPJ: 22.300.551/0110-56" + BREAK + 
+		"IE: 432.118.667.777" + BREAK, nomeLoja, logradouro, numero, complemento, bairro, municipio, estado, cep, 
+		telefone, observacao, cnpj, inscricaoEstadual);
+
 	}
 
 	private void rodarTestarRetorno(String expected, String nomeLoja, String logradouro, int numero, String complemento,
